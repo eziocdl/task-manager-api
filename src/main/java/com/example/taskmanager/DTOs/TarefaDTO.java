@@ -1,36 +1,19 @@
-package com.example.taskmanager.model;
+package com.example.taskmanager.DTOs;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-
-@Entity
-
-public class Tarefa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+public class TarefaDTO {
     private Long id;
     private String titulo;
     private String descricao;
     private LocalDate prazo;
-    private LocalDateTime inicioData;
+    private LocalTime inicioData;
     private LocalDateTime fimData;
-    @ManyToOne
-    @JoinColumn(name = "departamento_id")
-    private Departamento departamento;
-
-    private Duration duracao;
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id")
-    @JsonIgnore
-    private Pessoa pessoaAlocada;
-
-    private boolean finalizada;
+    private String departamento;
+    private String duracaoFormatada;
+    private Boolean finalizada;
     private LocalDateTime dataCriacao;
 
     public Long getId() {
@@ -65,11 +48,11 @@ public class Tarefa {
         this.prazo = prazo;
     }
 
-    public LocalDateTime getInicioData() {
+    public LocalTime getInicioData() {
         return inicioData;
     }
 
-    public void setInicioData(LocalDateTime inicioData) {
+    public void setInicioData(LocalTime inicioData) {
         this.inicioData = inicioData;
     }
 
@@ -81,35 +64,27 @@ public class Tarefa {
         this.fimData = fimData;
     }
 
-    public Departamento getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 
-    public Duration getDuracao() {
-        return duracao;
+    public String getDuracaoFormatada() {
+        return duracaoFormatada;
     }
 
-    public void setDuracao(Duration duracao) {
-        this.duracao = duracao;
+    public void setDuracaoFormatada(String duracaoFormatada) {
+        this.duracaoFormatada = duracaoFormatada;
     }
 
-    public Pessoa getPessoaAlocada() {
-        return pessoaAlocada;
-    }
-
-    public void setPessoaAlocada(Pessoa pessoaAlocada) {
-        this.pessoaAlocada = pessoaAlocada;
-    }
-
-    public boolean isFinalizada() {
+    public Boolean getFinalizada() {
         return finalizada;
     }
 
-    public void setFinalizada(boolean finalizada) {
+    public void setFinalizada(Boolean finalizada) {
         this.finalizada = finalizada;
     }
 

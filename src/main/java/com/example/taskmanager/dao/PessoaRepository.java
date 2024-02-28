@@ -7,17 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
-
-    List<Pessoa> findByNomeAndDepartamento(String nome, String departamento);
-
-    List<Pessoa> findByDepartamentoOrderByNome(String departamento);
-
-    List<Object[]> countTarefasByDepartamento(String departamento);
-
-    List<Object[]> sumDuracaoTarefasByDepartamento(String departamento);
-    List<Object[]> avgDuracaoTarefasByDepartamento(String departamento);
-    List<Pessoa> findByDepartamentoOrderByTarefasSizeDesc(String departamento);
-
-
+    public List<Pessoa> findByNome(String nome);
 }

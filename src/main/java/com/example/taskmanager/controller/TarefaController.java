@@ -1,5 +1,6 @@
 package com.example.taskmanager.controller;
 
+import com.example.taskmanager.DTOs.TarefaDTO;
 import com.example.taskmanager.model.Tarefa;
 import com.example.taskmanager.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,28 @@ public class TarefaController {
     public List<Tarefa> listarTarefas() {
         return tarefaService.buscarTodasTarefas();
     }
-
     @GetMapping("/{id}")
     public Optional<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
-        return tarefaService.buscarTarefaPorId(id);
+        return tarefaService.buscarTarefasPorId(id);
     }
+
+    @PutMapping("/alocar/{id}")
+    public Tarefa alocarTarefa(@PathVariable Long id, @RequestBody Long idPessoa) {
+        return tarefaService.alocarTarefa(id, idPessoa);
+    }
+
+    @PutMapping("/finalizar/{id}")
+    public TarefaDTO finalizarTarefa(@PathVariable Long id) {
+        return tarefaService.finalizarTarefa(id);
+    }
+    @PutMapping("/comecar/{id}")
+    public Tarefa comecarTarefa(@PathVariable Long id) {
+        return tarefaService.comecarTarefa(id);
+    }
+    @GetMapping("/pendentes")
+    public List<Tarefa> listarTarefasPendentes() {
+        return tarefaService.buscarTarefasPendentes();
+    }
+
+
 }

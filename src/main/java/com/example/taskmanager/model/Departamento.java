@@ -1,21 +1,28 @@
 package com.example.taskmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 
-public class Pessoa {
+public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String nome;
-    @ManyToOne
-    @JoinColumn(name = "departamento_id")
-    private Departamento departamento;
-    @OneToMany(mappedBy = "pessoaAlocada")
+    @OneToMany(mappedBy = "departamento")
+    @JsonIgnore
+    private List<Pessoa> pessoas;
+    @OneToMany(mappedBy = "departamento")
+    @JsonIgnore
     private List<Tarefa> tarefas;
+
+    public Departamento() {
+
+    }
 
     public Long getId() {
         return id;
@@ -33,12 +40,12 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public List<Pessoa> getPessoas() {
+        return pessoas;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
     public List<Tarefa> getTarefas() {
